@@ -8,5 +8,5 @@
 sudo bash &&
 sudo usermod -aG dialout juarez &&
 sudo chmod 777 /dev/ttyUSB0 && 
-source devel/setup.bash
+source ~/catkin_ws/devel/setup.bash
 ```
