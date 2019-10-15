@@ -5,8 +5,8 @@
 # Code Lines Configuration:
 
 ```{r, engine='bash', Config_code_lines}
-sudo bash
-sudo usermod -aG dialout juarez
-sudo chmod 777 /dev/ttyUSB0
+sudo bash &&
+sudo usermod -aG dialout juarez &&
+sudo chmod 777 /dev/ttyUSB0 && 
 source devel/setup.bash
 ```
