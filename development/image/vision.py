@@ -10,20 +10,36 @@ import time
 # entre o primeiro comando de giro e o proximo
 tw = 1.5 
 
-#Responsável pela movimentação para a esquerda
-#Ainda não foi feita a lógica
+# Velocidades maxima e minima de giro do robo
+vel_max = 5.0
+vel_min = -5.0
+
+# Responsavel pela movimentacao para a esquerda
+# Ainda nao foi feita a logica
+
+def calc_vel(perc):   
+    delta = vel_max - vel_min
+
+    result = ((delta*perc)/100)
+
+    return result
+
+
 def turn_left(perc):
     print('[Movendo para a esquerda com velocidade de {}%]'.format(perc))
+    print('Setando - Velocidade de giro = {}'.format(calc_vel(perc)))
     time.sleep(tw)
 
-#Responsável pela movimentação para a direita
-#Ainda não foi feita a lógica
+#Responsavel pela movimentacao para a direita
+#Ainda nao foi feita a logica
 def turn_right(perc):
     print('[Movendo para a direita com velocidade de {}%]'.format(perc))
+    print('Setando - Velocidade de giro = {}'.format(calc_vel(perc)))
+    print(calc_vel(perc))
     time.sleep(tw)
 
 #Define o video
-#src = 0 - Camera padrão do sistema
+#src = 0 - Camera padrao do sistema
 #src = 1 - Camera adicionada dps
 vs = VideoStream(src=0).start()
 
@@ -43,7 +59,7 @@ while True:
     #Criando uma outra imagem de 10x300 para diminuir o tempo de processamento
     img2 = img[180:190,0:300]
 
-    #Definindo os parâmetos para identificação do branco (Cor em HSV)
+    #Definindo os parametos para identificacao do branco (Cor em HSV)
     low = (0,0,0)
     up = (110,110,110)
 
@@ -56,11 +72,11 @@ while True:
     #Aplica a mascara
     # Na imagem, ele localiza os pontos que estão entre os ranges definidos de cor
     # Ou seja, quando a cor de um pixel for maior que o valor minimo definido (low)
-    # e menor que o maximo (up) ele transforma essa posição da imagem em um ponto branco
+    # e menor que o maximo (up) ele transforma essa posicao da imagem em um ponto branco
     mask = cv2.inRange(hsv, low, up)
     # O erode reduz o pixel em 1, pra remover os ruidos, se for apenas um pixel perdido ele ignora.
     mask = cv2.erode(mask, None, iterations=1)
-    # O dilate expande os pixels que não foram excluidos, formando uma região marcada
+    # O dilate expande os pixels que não foram excluidos, formando uma regiao marcada
     mask = cv2.dilate(mask, None, iterations=6)
 
     #Encontra o centro da area e da o output nele
@@ -89,7 +105,7 @@ while True:
         #Ponto direito a partir da extrema direita da imagem
         cpd = 300-pd
 
-        # Define os ranges de distância minima, em pixels, na qual o robô não vai atuar
+        # Define os ranges de distância minima, em pixels, na qual o robô nao vai atuar
         # Explicando melhor, se a distancia da direita e a da esquerda forem maior de 60px
         # Continua andando normal, se for menor, ai sim corrige a tragetória.
         diste = 60
@@ -99,11 +115,12 @@ while True:
         print('Pontos: ' + str(pos))
         print('PE (Azul)     = [{}]\nPD (Vermelho) = [{}]\nPEF = [{}]\n'.format(pe,pd,cpd))
 
-        #Desenha na tela quais pontos ele tá identificando
+        #Desenha na tela quais pontos ele ta identificando
         cv2.rectangle(img,(0,150),(300,160),(0,255,0),2)
         cv2.circle(img, (pe, 155), 5, (255,0,0),2)
         cv2.circle(img, (pd, 155), 4, (0,0,255),2)
 
+        #Se houver apenas 1 linha na pista
         #Se houver apenas 1 linha na pista
         if len(pos) == 1 :
             # Pegando a linha da Direita, ou seja, distância maior que a metade da tela:
