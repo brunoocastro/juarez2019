@@ -1,7 +1,9 @@
 # All things off Juarez for LARC 2019
 
-> On development, all documents.
-> juarez_vision is one ROS Package, copy that to catkin_ws and run catkin_make
+> On development folder, are all files.
+
+
+> juarez_vision is a ROS Package, copy that to catkin_ws and run catkin_make
 
 ## Code Lines Configuration:
 
