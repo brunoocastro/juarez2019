@@ -13,7 +13,7 @@ import rospy
 
 from op3_walking_module_msgs.msg import WalkingParam
 
-import init
+#import init
 
 # Define a variavel onde vamos alterar os parametros
 global move
@@ -23,7 +23,7 @@ status = 0
 
 # Time Waiting - Variavel para ajustar o tempo de espera
 # entre o primeiro comando de giro e o proximo
-tw = 1.5 
+tw = 0.1
 
 # Velocidades maxima e minima de giro do robo
 vel_max = 5.0
