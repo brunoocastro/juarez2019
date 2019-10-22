@@ -19,15 +19,13 @@ from op3_walking_module_msgs.msg import WalkingParam
 global move
 move = WalkingParam()
 
-status = 0
-
 # Time Waiting - Variavel para ajustar o tempo de espera
 # entre o primeiro comando de giro e o proximo
 tw = 0.1
 
 # Velocidades maxima e minima de giro do robo
-vel_max = 5.0
-vel_min = -5.0
+vel_max = 0.005
+vel_min = -0.005
 
 #Altura na tela onde comeca a percorrer
 htela = 130
@@ -58,7 +56,7 @@ def turn_right(perc):
     print('[Movendo para a direita com velocidade de {}%]'.format(perc))
     print('Setando - Velocidade de giro = {}'.format(calc_vel(perc)))
     move.angle_move_amplitude = calc_vel(perc)
-    
+   
     time.sleep(tw)
 
 def move_foward():
@@ -164,8 +162,8 @@ def vision():
 
             #Desenha na tela quais pontos ele ta identificando
             cv2.rectangle(img,(0,htela),(300,htelab),(0,255,0),2)
-            cv2.circle(img, (pe, htelab), 5, (255,0,0),2)
-            cv2.circle(img, (pd, htelab), 4, (0,0,255),2)
+            cv2.circle(img, (pe, htelab - 10), 5, (255,0,0),2)
+            cv2.circle(img, (pd, htelab - 10), 4, (0,0,255),2)
 
             #Se houver apenas 1 linha na pista
             #Se houver apenas 1 linha na pista
