@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import PyDynamixel_v2 as pd
 import cv2
 from time import sleep
