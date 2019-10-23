@@ -1,5 +1,7 @@
 import rospy
 from robotis_controller_msgs.srv import SetJointModule
+from std_msgs.msg import String
+
 
 a = SetJointModule()
 
@@ -7,3 +9,6 @@ a.joint_name = ['r_hip_yaw', 'r_hip_roll', 'r_hip_pitch', 'r_knee', 'r_ankle_pit
 a.module_name = ['walking_module','walking_module','walking_module','walking_module','walking_module','walking_module','walking_module','walking_module','walking_module','walking_module','walking_module']
 
 rospy.Service('robotis/set_present_joint_ctrl_modules', SetJointModule, a)#, self.queue_size)
+
+pub = rospy.Publisher('robotis/walking/command', String, queue_size=1)
+pub.publish("walking")
